@@ -1,6 +1,6 @@
 export default function generateSVG(params) {
   return `
-    <svg width="290" height="500" viewBox="0 0 290 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <svg width="290" height="291" viewBox="0 0 290 291" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       ${generateSVGDefs(params)}
       ${generateSVGBorderText(
         params.quoteToken,
@@ -39,28 +39,28 @@ function generateSVGDefs(params) {
       <filter id="f1">
         <feImage result="p0" xlink:href="data:image/svg+xml;base64,${btoa(
           `
-          <svg width='290' height='500' viewBox='0 0 290 500' xmlns='http://www.w3.org/2000/svg'>
-            <rect width='290px' height='500px' fill='#${params.color0}'/>
+          <svg width='290' height='291' viewBox='0 0 290 291' xmlns='http://www.w3.org/2000/svg'>
+            <rect width='290px' height='291px' fill='#${params.color0}'/>
           </svg>
           `
         )}" />
         <feImage result="p1" xlink:href="data:image/svg+xml;base64,${btoa(
           `
-          <svg width='290' height='500' viewBox='0 0 290 500' xmlns='http://www.w3.org/2000/svg'>
+          <svg width='290' height='291' viewBox='0 0 290 291' xmlns='http://www.w3.org/2000/svg'>
             <circle cx='${params.x1}' cy='${params.y1}' r='120px' fill='#${params.color1}'/>
           </svg>
           `
         )}" />
         <feImage result="p2" xlink:href="data:image/svg+xml;base64,${btoa(
           `
-          <svg width='290' height='500' viewBox='0 0 290 500' xmlns='http://www.w3.org/2000/svg'>
+          <svg width='290' height='291' viewBox='0 0 290 291' xmlns='http://www.w3.org/2000/svg'>
             <circle cx='${params.x2}' cy='${params.y2}' r='120px' fill='#${params.color2}'/>
           </svg>
           `
         )}" />
         <feImage result="p3" xlink:href="data:image/svg+xml;base64,${btoa(
           `
-          <svg width='290' height='500' viewBox='0 0 290 500' xmlns='http://www.w3.org/2000/svg'>
+          <svg width='290' height='291' viewBox='0 0 290 291' xmlns='http://www.w3.org/2000/svg'>
             <circle cx='${params.x3}' cy='${params.y3}' r='100px' fill='#${params.color3}'/>
           </svg>
           `
@@ -71,7 +71,7 @@ function generateSVGDefs(params) {
         <feGaussianBlur in="blendOut" stdDeviation="42" />
       </filter> 
       <clipPath id="corners">
-        <rect width="290" height="500" rx="42" ry="42" />
+        <rect width="290" height="291" rx="42" ry="42" />
       </clipPath>',
       <path id="text-path-a" d="M40 12 H250 A28 28 0 0 1 278 40 V460 A28 28 0 0 1 250 488 H40 A28 28 0 0 1 12 460 V40 A28 28 0 0 1 40 12 z" />
       <path id="minimap" d="M234 444C234 457.949 242.21 463 253 463" />
@@ -106,12 +106,12 @@ function generateSVGDefs(params) {
     <g clip-path="url(#corners)">
       <rect fill="${
         params.color0
-      }" x="0px" y="0px" width="290px" height="500px" />
-      <rect style="filter: url(#f1)" x="0px" y="0px" width="290px" height="500px" />
+      }" x="0px" y="0px" width="290px" height="291px" />
+      <rect style="filter: url(#f1)" x="0px" y="0px" width="290px" height="291px" />
       <g style="filter:url(#top-region-blur); transform:scale(1.5); transform-origin:center top;">
-      <rect fill="none" x="0px" y="0px" width="290px" height="500px" />
+      <rect fill="none" x="0px" y="0px" width="290px" height="291px" />
       <ellipse cx="50%" cy="0px" rx="180px" ry="120px" fill="#000" opacity="0.85" /></g>
-      <rect x="0" y="0" width="290" height="500" rx="42" ry="42" fill="rgba(0,0,0,0)" stroke="rgba(255,255,255,0.2)" />
+      <rect x="0" y="0" width="290" height="291" rx="42" ry="42" fill="rgba(0,0,0,0)" stroke="rgba(255,255,255,0.2)" />
     </g>
   `;
 }
