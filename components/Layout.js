@@ -7,37 +7,37 @@ export default function Layout({ children }) {
       {/* Meta + Head */}
       <Head>
         {/* Primary Meta Tags */}
-        <title>Uniswap LP Art</title>
-        <meta name="title" content="Uniswap LP Art" />
+        <title>Mimicry NFT Visualizer</title>
+        <meta name="title" content="Mimicry NFT Visualizer" />
         <meta
           name="description"
-          content="Explore and manipulate the art behind Uniswap's Liquidity Provider Non-Fungible Token positions."
+          content="Explore the art behind Mimicry's Non-Fungible Token positions."
         />
 
         {/* Open Graph + Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://uniswaplpart.com/" />
-        <meta property="og:title" content="Uniswap LP Art" />
+        <meta property="og:url" content="https://mimicry-nft-visualizer.netlify.app" />
+        <meta property="og:title" content="Mimicry NFT Visualizer" />
         <meta
           property="og:description"
-          content="Explore and manipulate the art behind Uniswap's Liquidity Provider Non-Fungible Token positions."
+          content="Explore the art behind Mimicry's Non-Fungible Token positions."
         />
         <meta
           property="og:image"
-          content="https://uniswaplpart.com/images/meta.png"
+          content=""
         />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://uniswaplpart.com" />
-        <meta property="twitter:title" content="Uniswap LP Art" />
+        <meta property="twitter:url" content="https://mimicry-nft-visualizer.netlify.app" />
+        <meta property="twitter:title" content="Mimicry NFT Visualizer" />
         <meta
           property="twitter:description"
-          content="Explore and manipulate the art behind Uniswap's Liquidity Provider Non-Fungible Token positions."
+          content="Explore the art behind Mimicry's Non-Fungible Token positions."
         />
         <meta
           property="twitter:image"
-          content="https://uniswaplpart.com/images/meta.png"
+          content=""
         />
 
         {/* Font preload */}
@@ -55,26 +55,34 @@ export default function Layout({ children }) {
 
       {/* Header content */}
       <div className={styles.layout__header}>
-        <img src="/vectors/logo.svg" alt="Uniswap logo" />
-        <h1>Uniswap LP Art</h1>
+        <img src="/vectors/logo.svg" alt="Mimicry logo" />
+        <h1>Mimicry NFT Visualizer</h1>
+        <p>Mimics are NFTs that represent positions within the {" "}
+          <a
+            href="https://mimicry.finance"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Mimicry Protocol
+          </a>.
+        </p> 
         <p>
-          Quick{" "}
+          This work is based on {" "}
+          <a
+            href="https://anishagnihotri.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Anish's
+          </a>{" "}
           <a
             href="https://github.com/anish-agnihotri/uniswap-lp-nfts"
             target="_blank"
             rel="noopener noreferrer"
           >
             side project
-          </a>{" "}
-          by{" "}
-          <a
-            href="https://anishagnihotri.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Anish
-          </a>{" "}
-          to showcase the incredible work by{" "}
+          </a>,{" "}
+          which is based on the incredible work by{" "}
           <a
             href="https://etherscan.io/address/0xe8ab59d3bcde16a29912de83a90eb39628cfc163"
             target="_blank"
