@@ -41,7 +41,7 @@ export default function Home() {
   const [tickUpper, setTickUpper] = useState(1500);
   const [tickLower, setTickLower] = useState(20000);
   const [tickSpacing, setTickSpacing] = useState(60);
-  const [baseTokenSymbol, setBaseTokenSymbol] = useState("mMBYAC");
+  const [baseTokenSymbol, setBaseTokenSymbol] = useState("mMBAYC");
   const [quoteTokenSymbol, setQuoteTokenSymbol] = useState("MIME");
   const [quoteToken, setQuoteToken] = useState(
     "0x1234567890123456789123456789012345678901"
