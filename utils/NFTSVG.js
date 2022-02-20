@@ -68,7 +68,6 @@ function generateSVGDefs(params) {
         <rect width="290" height="291" rx="42" ry="42" />
       </clipPath>',
       <path id="text-path-a" d="M40 12 H250 A28 28 0 0 1 278 40 V460 A28 28 0 0 1 250 488 H40 A28 28 0 0 1 12 460 V40 A28 28 0 0 1 40 12 z" />
-      <path id="minimap" d="M234 444C234 457.949 242.21 463 253 463" />
       <filter id="top-region-blur">
         <feGaussianBlur in="SourceGraphic" stdDeviation="24" />
       </filter>
@@ -143,7 +142,7 @@ function generateSVGCardMantle(quoteTokenSymbol, baseTokenSymbol, feeTier) {
   <g mask="url(#fade-symbol)">
     <rect fill="none" x="0px" y="0px" width="290px" height="200px" />
     <text y="70px" x="32px" fill="white" font-family="'Courier New', monospace" font-weight="200" font-size="36px">
-      ${quoteTokenSymbol}/${baseTokenSymbol}
+      ${baseTokenSymbol}
     </text>
     <text y="115px" x="32px" fill="white" font-family="'Courier New', monospace" font-weight="200" font-size="36px">
       ${feeTier}
@@ -161,32 +160,6 @@ function tickToString(tick) {
     sign = "-";
   }
   return `${sign}${tick.toString()}`;
-}
-
-function rangeLocation(tickLower, tickUpper) {
-  const midPoint = (tickLower + tickUpper) / 2;
-
-  if (midPoint < -100_000) {
-    return ["8", "7"];
-  } else if (midPoint < -50_000) {
-    return ["8", "10.5"];
-  } else if (midPoint < -10_000) {
-    return ["8", "14.25"];
-  } else if (midPoint < -100) {
-    return ["10", "18"];
-  } else if (midPoint < 0) {
-    return ["11", "21"];
-  } else if (midPoint < 100) {
-    return ["13", "23"];
-  } else if (midPoint < 10_000) {
-    return ["15", "25"];
-  } else if (midPoint < 50_000) {
-    return ["18", "26"];
-  } else if (midPoint < 100_000) {
-    return ["21", "27"];
-  } else {
-    return ["24", "27"];
-  }
 }
 
 function s(x) {
@@ -207,37 +180,33 @@ function generateSVGPositionDataAndLocationCurve(
   const str1length = bytes(tokenId).length + 4;
   const str2length = bytes(tickLowerStr).length + 10;
   const str3length = bytes(tickUpperStr).length + 10;
-  const [xCoord, yCoord] = rangeLocation(tickLower, tickUpper);
 
   return `
-  <g style="transform:translate(29px, 170px)">
+  <g style="transform:translate(29px, 175px)">
     <rect width="${(
       7 *
       (str1length + 4)
     ).toString()}px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />
     <text x="12px" y="17px" font-family="Courier New', monospace" font-size="12px" fill="white">
-      <tspan fill="rgba(255,255,255,0.6)">ID: </tspan>
-      ${tokenId}
+      <tspan fill="rgba(255,255,255,0.6)">ID: </tspan>${tokenId}
     </text>
   </g>
-  <g style="transform:translate(29px, 200px)">
+  <g style="transform:translate(29px, 205px)">
     <rect width="${(
       7 *
       (str2length + 4)
     ).toString()}px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />
     <text x="12px" y="17px" font-family="Courier New', monospace" font-size="12px" fill="white">
-      <tspan fill="rgba(255,255,255,0.6)">Value: $</tspan>
-      ${tickLowerStr}
+      <tspan fill="rgba(255,255,255,0.6)">Value: $</tspan>${tickLowerStr}
     </text>
   </g>
-  <g style="transform:translate(29px, 230px)">
+  <g style="transform:translate(29px, 235px)">
     <rect width="${(
       7 *
       (str3length + 4)
     ).toString()}px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />
     <text x="12px" y="17px" font-family="Courier New', monospace" font-size="12px" fill="white">
-      <tspan fill="rgba(255,255,255,0.6)">Profit: $</tspan>
-      ${tickUpperStr}
+      <tspan fill="rgba(255,255,255,0.6)">Profit: $</tspan>${tickUpperStr}
     </text>
   </g>
 	`;
@@ -246,7 +215,7 @@ function generateSVGPositionDataAndLocationCurve(
 function generateSVGRareSparkle(isRare) {
   if (isRare) {
     return `
-			<g style="transform:translate(226px, 230px)">
+			<g style="transform:translate(226px, 224px)">
         <rect width="36px" height="36px" rx="8px" ry="8px" fill="none" stroke="rgba(255,255,255,0.2)" />
 			<g>
       <path style="transform:translate(6px,6px)" d="M12 0L12.6522 9.56587L18 1.6077L13.7819 10.2181L22.3923 6L14.4341 11.3478L24 12L14.4341 12.6522L22.3923 18L13.7819 13.7819L18 22.3923L12.6522 14.4341L12 24L11.3478 14.4341L6 22.3923L10.2181 13.7819L1.6077 18L9.56587 12.6522L0 12L9.56587 11.3478L1.6077 6L10.2181 10.2181L6 1.6077L11.3478 9.56587L12 0Z" fill="white" />',
