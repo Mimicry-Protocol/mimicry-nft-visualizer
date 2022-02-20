@@ -8,7 +8,7 @@ import styles from "styles/Home.module.scss"; // Page styles
 const TOKENS = [
   { name: "DAI", address: "0x6b175474e89094c44da98b954eedeac495271d0f" },
   { name: "USDC", address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" },
-  { name: "WETH", address: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" },
+  { name: "mMBYAC", address: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" },
   { name: "AAVE", address: "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9" },
   { name: "BADGER", address: "0x3472a5a71965499acd81997a54bba8d852c6e53d" },
   { name: "COMP", address: "0xc00e94cb662c3520282e6f5717214004a7f26888" },
@@ -20,7 +20,7 @@ const TOKENS = [
   { name: "SUSHI", address: "0x6b3595068778dd592e39a122f4f5a5cf09c90fe2" },
   { name: "TORN", address: "0x77777feddddffc19ff86db637967013e6c6a116c" },
   { name: "UMA", address: "0x04fa0d235c4abf4bcf4787af4cf447de572ef828" },
-  { name: "UNI", address: "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984" },
+  { name: "MIME", address: "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984" },
 ];
 
 export default function Home() {
@@ -33,16 +33,16 @@ export default function Home() {
   const [y3, setY3] = useState(131);
   const [isRare, setIsRare] = useState(true);
   const [tokenId, setTokenId] = useState(123);
-  const [feeTier, setFeeTier] = useState(0.05);
+  const [feeTier, setFeeTier] = useState(12.3);
   const [color0, setColor0] = useState("123456");
   const [color1, setColor1] = useState("abcdea");
   const [color2, setColor2] = useState("678901");
   const [color3, setColor3] = useState("fabcdf");
-  const [tickUpper, setTickUpper] = useState(3000);
-  const [tickLower, setTickLower] = useState(-1000);
+  const [tickUpper, setTickUpper] = useState(1500);
+  const [tickLower, setTickLower] = useState(20000);
   const [tickSpacing, setTickSpacing] = useState(60);
-  const [baseTokenSymbol, setBaseTokenSymbol] = useState("WETH");
-  const [quoteTokenSymbol, setQuoteTokenSymbol] = useState("UNI");
+  const [baseTokenSymbol, setBaseTokenSymbol] = useState("mMBYAC");
+  const [quoteTokenSymbol, setQuoteTokenSymbol] = useState("MIME");
   const [quoteToken, setQuoteToken] = useState(
     "0x1234567890123456789123456789012345678901"
   );
