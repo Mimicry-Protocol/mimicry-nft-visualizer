@@ -153,36 +153,6 @@ function generateSVGCardMantle(quoteTokenSymbol, baseTokenSymbol, feeTier) {
 	`;
 }
 
-function getCurve(tickLower, tickUpper, tickSpacing) {
-  const curve1 = "M1 1C41 41 105 105 145 145";
-  const curve2 = "M1 1C33 49 97 113 145 145";
-  const curve3 = "M1 1C33 57 89 113 145 145";
-  const curve4 = "M1 1C25 65 81 121 145 145";
-  const curve5 = "M1 1C17 73 73 129 145 145";
-  const curve6 = "M1 1C9 81 65 137 145 145";
-  const curve7 = "M1 1C1 89 57.5 145 145 145";
-  const curve8 = "M1 1C1 97 49 145 145 145";
-  const tickRange = (tickUpper - tickLower) / tickSpacing;
-
-  if (tickRange <= 4) {
-    return curve1;
-  } else if (tickRange <= 8) {
-    return curve2;
-  } else if (tickRange <= 16) {
-    return curve3;
-  } else if (tickRange <= 32) {
-    return curve4;
-  } else if (tickRange <= 64) {
-    return curve5;
-  } else if (tickRange <= 128) {
-    return curve6;
-  } else if (tickRange <= 256) {
-    return curve7;
-  } else {
-    return curve8;
-  }
-}
-
 function tickToString(tick) {
   let sign = "";
 
@@ -240,7 +210,7 @@ function generateSVGPositionDataAndLocationCurve(
   const [xCoord, yCoord] = rangeLocation(tickLower, tickUpper);
 
   return `
-  <g style="transform:translate(29px, 384px)">
+  <g style="transform:translate(29px, 170px)">
     <rect width="${(
       7 *
       (str1length + 4)
@@ -250,30 +220,25 @@ function generateSVGPositionDataAndLocationCurve(
       ${tokenId}
     </text>
   </g>
-  <g style="transform:translate(29px, 414px)">
+  <g style="transform:translate(29px, 200px)">
     <rect width="${(
       7 *
       (str2length + 4)
     ).toString()}px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />
     <text x="12px" y="17px" font-family="Courier New', monospace" font-size="12px" fill="white">
-      <tspan fill="rgba(255,255,255,0.6)">Min Tick: </tspan>
+      <tspan fill="rgba(255,255,255,0.6)">Value: $</tspan>
       ${tickLowerStr}
     </text>
   </g>
-  <g style="transform:translate(29px, 444px)">
+  <g style="transform:translate(29px, 230px)">
     <rect width="${(
       7 *
       (str3length + 4)
     ).toString()}px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />
     <text x="12px" y="17px" font-family="Courier New', monospace" font-size="12px" fill="white">
-      <tspan fill="rgba(255,255,255,0.6)">Max Tick: </tspan>
+      <tspan fill="rgba(255,255,255,0.6)">Profit: $</tspan>
       ${tickUpperStr}
     </text>
-  </g>
-  <g style="transform:translate(226px, 433px)">
-    <rect width="36px" height="36px" rx="8px" ry="8px" fill="none" stroke="rgba(255,255,255,0.2)" />
-    <path stroke-linecap="round" d="M8 9C8.00004 22.9494 16.2099 28 27 28" fill="none" stroke="white" />
-    <circle style="transform:translate3d(${xCoord}px, ${yCoord}px, 0px)" cx="0px" cy="0px" r="4px" fill="white"/>
   </g>
 	`;
 }
@@ -281,7 +246,7 @@ function generateSVGPositionDataAndLocationCurve(
 function generateSVGRareSparkle(isRare) {
   if (isRare) {
     return `
-			<g style="transform:translate(226px, 392px)">
+			<g style="transform:translate(226px, 230px)">
         <rect width="36px" height="36px" rx="8px" ry="8px" fill="none" stroke="rgba(255,255,255,0.2)" />
 			<g>
       <path style="transform:translate(6px,6px)" d="M12 0L12.6522 9.56587L18 1.6077L13.7819 10.2181L22.3923 6L14.4341 11.3478L24 12L14.4341 12.6522L22.3923 18L13.7819 13.7819L18 22.3923L12.6522 14.4341L12 24L11.3478 14.4341L6 22.3923L10.2181 13.7819L1.6077 18L9.56587 12.6522L0 12L9.56587 11.3478L1.6077 6L10.2181 10.2181L6 1.6077L11.3478 9.56587L12 0Z" fill="white" />',
