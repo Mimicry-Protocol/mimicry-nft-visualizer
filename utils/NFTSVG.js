@@ -13,12 +13,6 @@ export default function generateSVG(params) {
         params.baseTokenSymbol,
         params.feeTier
       )}
-      ${generateSVGCurve(
-        params.tickLower,
-        params.tickUpper,
-        params.tickSpacing,
-        params.overRange
-      )}
       ${generateSVGPositionDataAndLocationCurve(
         params.tokenId.toString(),
         params.tickLower,
@@ -155,7 +149,7 @@ function generateSVGCardMantle(quoteTokenSymbol, baseTokenSymbol, feeTier) {
       ${feeTier}
     </text>
   </g>
-  <rect x="16" y="16" width="258" height="468" rx="26" ry="26" fill="rgba(0,0,0,0)" stroke="rgba(255,255,255,0.2)" />'
+  <rect x="16" y="16" width="258" height="259" rx="26" ry="26" fill="rgba(0,0,0,0)" stroke="rgba(255,255,255,0.2)" />'
 	`;
 }
 
@@ -187,68 +181,6 @@ function getCurve(tickLower, tickUpper, tickSpacing) {
   } else {
     return curve8;
   }
-}
-
-function generateSVGCurveCircle(overRange) {
-  const curvex1 = "73";
-  const curvey1 = "190";
-  const curvex2 = "217";
-  const curvey2 = "334";
-
-  if (overRange == 1 || overRange == -1) {
-    return `
-      <circle 
-        cx="${overRange == -1 ? curvex1 : curvex2}px" 
-        cy="${overRange == -1 ? curvey1 : curvey2}px" 
-        r="4px" 
-        fill="white" 
-      />
-      <circle 
-        cx="${overRange == -1 ? curvex1 : curvex2}px" 
-        cy="${overRange == -1 ? curvey1 : curvey2}px'" 
-        r="24px" 
-        fill="none" 
-        stroke="white" 
-      />`;
-  } else {
-    return `
-      <circle 
-        cx="${curvex1}px" 
-        cy="${curvey1}px"
-        r="4px" 
-        fill="white" 
-      />
-			<circle 
-        cx="${curvex2}px"
-        cy="${curvey2}px" 
-        r="4px" 
-        fill="white" 
-      />
-		`;
-  }
-}
-
-function generateSVGCurve(tickLower, tickUpper, tickSpacing, overRange) {
-  if (overRange === 1) {
-    overRange = "#fade-up";
-  } else if (overRange === -1) {
-    overRange = "#fade-down";
-  } else {
-    overRange = "#none";
-  }
-  const curve = getCurve(tickLower, tickUpper, tickSpacing);
-
-  return `
-		<g mask="url('fade')" style="transform:translate(72px,189px)">
-		  <rect x="-16px" y="-16px" width="180px" height="180px" fill="none" />
-		  <path d="${curve}" stroke="rgba(0,0,0,0.3)" stroke-width="32px" fill="none" stroke-linecap="round" />
-		</g>
-    <g mask="url('fade')" style="transform:translate(72px,189px)">
-		  <rect x="-16px" y="-16px" width="180px" height="180px" fill="none" />
-		  <path d="${curve}" stroke="rgba(255,255,255,1)" fill="none" stroke-linecap="round" />
-    </g>
-		${generateSVGCurveCircle(overRange)}
-	`;
 }
 
 function tickToString(tick) {
