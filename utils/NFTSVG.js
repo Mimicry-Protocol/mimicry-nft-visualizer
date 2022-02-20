@@ -67,7 +67,7 @@ function generateSVGDefs(params) {
       <clipPath id="corners">
         <rect width="290" height="291" rx="42" ry="42" />
       </clipPath>',
-      <path id="text-path-a" d="M40 12 H250 A28 28 0 0 1 278 40 V250 A28 28 0 0 1 250 278 H40 A28 28 0 0 1 12 250 V40 A28 28 0 0 1 40 12 z" />
+      <path id="text-path-a" d="M40 12 H250 A28 28 0 0 1 278 40 V250 A28 28 0 0 1 250 279 H40 A28 28 0 0 1 12 250 V40 A28 28 0 0 1 40 12 z" />
       <filter id="top-region-blur">
         <feGaussianBlur in="SourceGraphic" stdDeviation="24" />
       </filter>
