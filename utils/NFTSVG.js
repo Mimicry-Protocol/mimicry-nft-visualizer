@@ -247,7 +247,7 @@ function generateSVGPositionDataAndLocationCurve(
       (str3length + 4)
     ).toString()}px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />
     <text x="12px" y="17px" font-family="Courier New', monospace" font-size="12px" fill="white">
-      <tspan fill="rgba(255,255,255,0.6)">Time Open: </tspan>${timeOpen}
+      <tspan fill="rgba(255,255,255,0.6)">Hold Time: </tspan>${timeOpen}
     </text>
   </g>
 	`;
