@@ -1,6 +1,6 @@
-# Uniswap LP Art
+# Mimicry NFT Visualizer
 
-Quick project to enable customization of Uniswap's LP NFTs.
+Quick project to illustrate customization of Mimicry's NFTs.
 
 Solidity code to generate NFTs is transcribed in `utils/NFTSVG.js`.
 
