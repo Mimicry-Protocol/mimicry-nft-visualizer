@@ -1,22 +1,52 @@
-export default function generateSVG(params) {
+const getRandomColor = () => { 
+  return Math.floor(Math.random() * 16777215).toString(16);
+}
+
+export default function generateSVG() {
+  const params = {
+    collectionChainId: "EVM 1",
+    collectionAddress: "0xabcdeabcdefabcdefabcdefabcdefabcdefabcdf",
+    collectionSymbol: "BAYC",
+    color0: getRandomColor(),
+    color1: getRandomColor(),
+    color2: getRandomColor(),
+    color3: getRandomColor(),
+    direction: "👆", // or "👇"
+    isRare: Math.random() <= 0.02, // shows up 2% of the time
+    timeOpen: "23 hours", // human readable... e.g. 0-23 hours, 1 day, 2 days, etc.
+    collateralTokenChainId: "EVM 137",
+    collateralTokenAddress: "0x1234567890123456789123456789012345678901",
+    collateralTokenSymbol: "USDC",
+    collateralAmountUsd: 1,
+    mimicTokenId: 123,
+    x1: 192,
+    x2: 243,
+    x3: 37,
+    y1: 362,
+    y2: 362,
+    y3: 131
+  }
+  
   return `
     <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       ${generateSVGDefs(params)}
       ${generateSVGBorderText(
-        params.quoteToken,
-        params.baseToken,
-        params.quoteTokenSymbol,
-        params.baseTokenSymbol
+        params.collateralTokenChainId,
+        params.collateralTokenAddress,
+        params.collectionChainId,
+        params.collectionAddress,
+        params.collateralTokenSymbol,
+        params.collectionSymbol
       )}
       ${generateSVGCardMantle(
-        params.quoteTokenSymbol,
-        params.baseTokenSymbol,
-        params.feeTier
+        params.collateralTokenSymbol,
+        params.collectionSymbol,
+        params.direction
       )}
       ${generateSVGPositionDataAndLocationCurve(
-        params.tokenId.toString(),
-        params.tickLower,
-        params.tickUpper
+        params.mimicTokenId.toString(),
+        params.collateralAmountUsd,
+        params.timeOpen
       )}
       ${generateSVGRareSparkle(params.isRare)}
     </svg>
@@ -123,42 +153,41 @@ function generateSVGDefs(params) {
 }
 
 function generateSVGBorderText(
-  quoteToken,
-  baseToken,
-  quoteTokenSymbol,
-  baseTokenSymbol
+  collateralTokenChainId,
+  collateralTokenAddress,
+  collectionChainId,
+  collectionAddress,
+  collateralTokenSymbol,
+  collectionSymbol
 ) {
   return `
   <text text-rendering="optimizeSpeed">
     <textPath startOffset="-100%" fill="white" font-family="Courier New', monospace" font-size="10px" xlink:href="#text-path-a">
-      ${baseToken} • ${baseTokenSymbol}
+      ${collectionChainId}-${collectionAddress} • ${collectionSymbol}
       <animate additive="sum" attributeName="startOffset" from="0%" to="100%" begin="0s" dur="30s" repeatCount="indefinite" />
     </textPath> 
     <textPath startOffset="0%" fill="white" font-family="Courier New', monospace" font-size="10px" xlink:href="#text-path-a">
-      ${baseToken} • ${baseTokenSymbol}
+      ${collectionChainId}-${collectionAddress} • ${collectionSymbol}
       <animate additive="sum" attributeName="startOffset" from="0%" to="100%" begin="0s" dur="30s" repeatCount="indefinite" />
     </textPath>
     <textPath startOffset="50%" fill="white" font-family="Courier New', monospace" font-size="10px" xlink:href="#text-path-a">
-      ${quoteToken} • ${quoteTokenSymbol}
+      ${collateralTokenChainId}-${collateralTokenAddress} • ${collateralTokenSymbol}
       <animate additive="sum" attributeName="startOffset" from="0%" to="100%" begin="0s" dur="30s" repeatCount="indefinite" />
     </textPath>
     <textPath startOffset="-50%" fill="white" font-family="Courier New', monospace" font-size="10px" xlink:href="#text-path-a">
-      ${quoteToken} • ${quoteTokenSymbol}
+      ${collateralTokenChainId}-${collateralTokenAddress} • ${collateralTokenSymbol}
       <animate additive="sum" attributeName="startOffset" from="0%" to="100%" begin="0s" dur="30s" repeatCount="indefinite" />
     </textPath>
   </text>
 	`;
 }
 
-function generateSVGCardMantle(quoteTokenSymbol, baseTokenSymbol, feeTier) {
+function generateSVGCardMantle(collateralTokenSymbol, collectionSymbol, direction) {
   return `
   <g mask="url(#fade-symbol)">
     <rect fill="none" x="0px" y="0px" width="300px" height="200px" />
     <text y="70px" x="32px" fill="white" font-family="'Courier New', monospace" font-weight="200" font-size="36px">
-      ${baseTokenSymbol}
-    </text>
-    <text y="115px" x="32px" fill="white" font-family="'Courier New', monospace" font-weight="200" font-size="36px">
-      ${feeTier}
+      ${collectionSymbol}${direction}
     </text>
   </g>
   <rect x="16" y="16" width="270" height="270" rx="26" ry="26" fill="rgba(0,0,0,0)" stroke="rgba(255,255,255,0.2)" />'
@@ -184,15 +213,14 @@ function bytes(string) {
 }
 
 function generateSVGPositionDataAndLocationCurve(
-  tokenId,
-  tickLower,
-  tickUpper
+  mimicTokenId,
+  collateralAmountUsd,
+  timeOpen
 ) {
-  const tickLowerStr = tickToString(tickLower);
-  const tickUpperStr = tickToString(tickUpper);
-  const str1length = bytes(tokenId).length + 4;
-  const str2length = bytes(tickLowerStr).length + 10;
-  const str3length = bytes(tickUpperStr).length + 10;
+  const collateralAmountUsdStr = collateralAmountUsd.toString();
+  const str1length = bytes(mimicTokenId).length + 4;
+  const str2length = bytes(collateralAmountUsdStr).length + 13;
+  const str3length = bytes(timeOpen).length + 11;
 
   return `
   <g style="transform:translate(29px, 175px)">
@@ -201,7 +229,7 @@ function generateSVGPositionDataAndLocationCurve(
       (str1length + 4)
     ).toString()}px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />
     <text x="12px" y="17px" font-family="Courier New', monospace" font-size="12px" fill="white">
-      <tspan fill="rgba(255,255,255,0.6)">ID: </tspan>${tokenId}
+      <tspan fill="rgba(255,255,255,0.6)">ID: </tspan>${mimicTokenId}
     </text>
   </g>
   <g style="transform:translate(29px, 205px)">
@@ -210,7 +238,7 @@ function generateSVGPositionDataAndLocationCurve(
       (str2length + 4)
     ).toString()}px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />
     <text x="12px" y="17px" font-family="Courier New', monospace" font-size="12px" fill="white">
-      <tspan fill="rgba(255,255,255,0.6)">Value: $</tspan>${tickLowerStr}
+      <tspan fill="rgba(255,255,255,0.6)">Collateral: $</tspan>${collateralAmountUsdStr}
     </text>
   </g>
   <g style="transform:translate(29px, 235px)">
@@ -219,7 +247,7 @@ function generateSVGPositionDataAndLocationCurve(
       (str3length + 4)
     ).toString()}px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />
     <text x="12px" y="17px" font-family="Courier New', monospace" font-size="12px" fill="white">
-      <tspan fill="rgba(255,255,255,0.6)">Profit: $</tspan>${tickUpperStr}
+      <tspan fill="rgba(255,255,255,0.6)">Time Open: </tspan>${timeOpen}
     </text>
   </g>
 	`;
